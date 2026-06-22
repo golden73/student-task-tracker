@@ -15,6 +15,7 @@ interface TaskContextType {
   addTask: (task: Task) => void;
   deleteTask: (id: number) => void;
   toggleStatus: (id: number) => void;
+  updateTask: (id: number, updates: Partial<Task>) => void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -31,9 +32,12 @@ export function TaskProvider({ children }: { children: ReactNode }) {
       )
     );
   };
+  const updateTask = (id: number, updates: Partial<Task>) => {
+    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, ...updates } : t)));
+  };
 
   return (
-    <TaskContext.Provider value={{ tasks, addTask, deleteTask, toggleStatus }}>
+    <TaskContext.Provider value={{ tasks, addTask, deleteTask, toggleStatus, updateTask }}>
       {children}
     </TaskContext.Provider>
   );

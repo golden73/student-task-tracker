@@ -2,18 +2,11 @@
 import { useState } from 'react';
 import { Task } from '../context/TaskContext';
 
-// interface Task {
-//   id: number;
-//   title: string;
-//   description: string;
-//   dueDate: string;
-//   priority: string;
-//   status: string;
-// }
-
-
 interface TaskFormProps {
   onAdd: (task: Task) => void;
+  onUpdate?: (id: number, updates: Partial<Task>) => void;
+  editingTask?: Task | null;
+  onCancelEdit?: () => void;
 }
 
 export default function TaskForm({ onAdd }: TaskFormProps) {
