@@ -45,8 +45,8 @@ export default function Home() {
         {showVideo && (
           <div className="modal-overlay" onClick={() => setShowVideo(false)}>
             <div className="modal-content">
-              <video width="100%" controls autoPlay>
-                <source src="./public/demo.mp4" type="video/mp4" />
+              <video width="100%" height="80%" controls autoPlay muted>
+                <source src="../public/demo.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
               </video>
             </div>

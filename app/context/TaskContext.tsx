@@ -20,8 +20,27 @@ interface TaskContextType {
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
+const defaultTasks: Task[] = [
+  {
+    id: 1,
+    title: 'Complete Cloud Computing assignment',
+    description: 'Finish the serverless deployment write-up and submit on the portal.',
+    dueDate: '2026-06-30',
+    priority: 'High',
+    status: 'Pending',
+  },
+  {
+    id: 2,
+    title: 'Review CTF web exploitation labs',
+    description: 'Go through PortSwigger SQLi and XSS modules before the next session.',
+    dueDate: '2026-06-25',
+    priority: 'Medium',
+    status: 'Pending',
+  },
+];
+
 export function TaskProvider({ children }: { children: ReactNode }) {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(defaultTasks);
 
   const addTask = (task: Task) => setTasks((prev) => [...prev, task]);
   const deleteTask = (id: number) => setTasks((prev) => prev.filter((t) => t.id !== id));

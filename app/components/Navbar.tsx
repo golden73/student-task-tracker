@@ -1,20 +1,21 @@
 'use client';
-import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isLanding = pathname === '/';
+
   return (
     <nav>
       <div className='logo'>Task Track</div>
-      <button className='menu-toggle' onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? '✕' : '☰'}
-      </button>
-      <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-        <Link href='/' onClick={() => setIsOpen(false)}>Home</Link>
-        <Link href='/dashboard' onClick={() => setIsOpen(false)}>Dashboard</Link>
-        <Link href='/tasks' onClick={() => setIsOpen(false)}>Tasks</Link>
-      </div>
+      {!isLanding && (
+        <div className='nav-links'>
+          <Link href='/' className={pathname === '/' ? 'active-link' : ''}>Home</Link>
+          <Link href='/dashboard' className={pathname === '/dashboard' ? 'active-link' : ''}>Dashboard</Link>
+          <Link href='/tasks' className={pathname === '/tasks' ? 'active-link' : ''}>Tasks</Link>
+        </div>
+      )}
     </nav>
   );
 }

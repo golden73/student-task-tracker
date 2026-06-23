@@ -7,7 +7,7 @@ import { Task } from '../context/TaskContext';
 export default function TasksPage() {
   const { tasks, deleteTask, toggleStatus, addTask, updateTask } = useTasks();
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-  const [filter, setFilter] = useState<'All' | 'Pending' | 'Completed'>('All');
+  const [filter, setFilter] = useState<'All' | 'Pending' | 'Completed' | 'Overdue'>('All');
 
   const filteredTasks = tasks.filter(t => {
     if (filter === 'All') return true;
@@ -16,6 +16,9 @@ export default function TasksPage() {
 
   return (
     <div className="displayView">
+      <div className='nav'>
+        
+      </div>
       <h1>Task Management</h1>
 
       <TaskForm
@@ -26,7 +29,7 @@ export default function TasksPage() {
       />
 
       <div className="filter-bar">
-        {(['All', 'Pending', 'Completed'] as const).map(status => (
+        {(['All', 'Pending', 'Completed', 'Overdue'] as const).map(status => (
           <button
             key={status}
             className={filter === status ? 'filter-active' : ''}
@@ -41,7 +44,7 @@ export default function TasksPage() {
         <div key={task.id} className="task-card">
           <h3>{task.title}</h3>
           <p>Status: {task.status} | Due: {task.dueDate}</p>
-          <button className="status" onClick={() => toggleStatus(task.id)}>Toggle Status</button>
+          {/* <button className="status" onClick={() => toggleStatus(task.id)}>Toggle Status</button> */}
           <button className="edit" onClick={() => setEditingTask(task)}>Edit</button>
           <button className="del" onClick={() => deleteTask(task.id)}>Delete</button>
         </div>
