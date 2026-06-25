@@ -29,6 +29,7 @@ nav {
   position: relative;
   z-index: 1000;
   border-bottom: 1px solid var(--text);
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -59,7 +60,7 @@ nav {
   color:#ffffff;
 }
 .nav-links a:hover { color: #ffffff; }
-/* .nav-links.active { display: flex !important; } */
+
 /* Hero Section */
 .hero { 
   text-align: center; 
@@ -68,16 +69,15 @@ nav {
   width: 100%;
   color: white;
   border-radius: 12px;
-
 }
 .hero h1 {
-  font-size: 56px;
+  font-size: clamp(2rem, 6vw, 56px);
   line-height: 1.1;
   margin-bottom: 20px;
 }
 .hero p {
   color: var(--text);
-  font-size: 18px;
+  font-size: clamp(14px, 2.5vw, 18px);
   margin-bottom: 40px;
 }
 .hero span {
@@ -89,6 +89,7 @@ nav {
   display: flex; 
   gap: 15px; 
   justify-content: center; 
+  flex-wrap: wrap;
 }
 button { 
   padding: 12px 24px; 
@@ -119,6 +120,7 @@ button {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 16px;
 }
 
 .modal-content {
@@ -138,11 +140,10 @@ button {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, max(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   width: min(100%, 1200px);
   margin: 40px auto;
-
 }
 
 .feature-card {
@@ -176,12 +177,14 @@ button {
   width: 100%;
   max-width: 1200px;
   border-top: 3px solid var(--gold);
-  padding-top: 30px;
+  padding: 30px 16px 0;
+  margin: 0 auto;
   color: white;
 }
 
 .cards {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   margin: 40px auto;
   width: 90%;
@@ -195,16 +198,20 @@ button {
   text-align: center;
   font-weight: bold;
   color: var(--text-h);
+  flex: 1 1 140px;
 }
 
 /*Task Management*/
 .task-form {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
   padding: 20px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
+  width: 100%;
+  max-width: 700px;
 }
 input, textarea, select {
   background: rgba(255, 255, 255, 0.05);
@@ -232,6 +239,8 @@ select {
 
 .task-card {
   margin-top: 4rem;
+  width: 90%;
+  max-width: 700px;
 }
 .task-card button {
   margin: 2px;
@@ -239,62 +248,20 @@ select {
 .del{
   background: rgba(255, 1, 1, 0.692);
 }
-/* Mobile Navigation */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  * { box-sizing: border-box; }
-  main { width: 100%; min-width: 100%;
-    max-width: 1200px; margin: 0 auto; }
-  .displayView {
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-  }
-  .dashboard-header { display: block; margin: 25px; }
-  .dashboard-header .btn-primary {
-    position: fixed; justify-content: right;
-    right: 2%; bottom: 2%;
-    font-size: large; border-radius: 50px;
-  }
-  .dashboard-header > .btn-primary:hover {
-    transform: translateY(-0.2px); border: 1px solid var(--gold);
-  }
-  .cards {
-    display: flex;
-    gap: 2px;
-    width: 100%;
-    justify-content: center;
-  }
-  .cards > div {
-    width: fit-content;
-    padding: 8px 10px;
-    margin: 2px;
-    text-align: center;
-    border: 1px solid rgb(0, 0, 0);
-  }
-  .cards > div > h3 {
-    font-size: 14px;
-  }
-  .cards > div > p {
-    margin-top: 5px;
-  }
-}
 
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .filter-bar {
   display: flex;
+  flex-wrap: wrap;
   gap: 5px;
   justify-content: center;
   margin: 20px 0;
@@ -332,17 +299,21 @@ select {
   align-items: center;
   align-content: center;
   gap: 8px;
+  width: 100%;
 }
 
 .task-list-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(253, 218, 17, 0.2);
   padding: 10px 16px;
   margin: 10px;
   border-radius: 8px;
   width: 90%;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 .task-list-item p {
   align-content: center;
@@ -365,4 +336,110 @@ select {
 
 .page-transition {
   animation: fadeIn 0.35s ease-out;
+}
+
+/* ===== Tablet ===== */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+  }
+  .nav-links {
+    margin-top: 16px;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 1.2em;
+  }
+  .nav-links a {
+    font-size: large;
+  }
+
+  .cards {
+    width: 100%;
+  }
+  .cards > div {
+    flex: 1 1 45%;
+  }
+
+  .task-form {
+    width: 95%;
+  }
+  .task-card {
+    width: 95%;
+  }
+}
+
+/* ===== Phone ===== */
+@media (max-width: 480px) {
+  * { box-sizing: border-box; }
+  main { width: 100%; min-width: 100%; max-width: 1200px; margin: 0 auto; }
+
+  .displayView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px 0;
+  }
+
+  .hero { padding: 50px 16px; }
+
+  .dashboard-header { flex-direction: column; align-items: stretch; margin: 16px 0; }
+  .dashboard-header .btn-primary {
+    position: fixed;
+    right: 16px; bottom: 16px;
+    font-size: large;
+    border-radius: 50px;
+    z-index: 999;
+  }
+  .dashboard-header > .btn-primary:hover {
+    transform: translateY(-2px);
+    border: 1px solid var(--gold);
+  }
+
+  .cards {
+    gap: 8px;
+  }
+  .cards > div {
+    flex: 1 1 calc(50% - 8px);
+    padding: 12px 8px;
+  }
+  .cards > div > h3 { font-size: 13px; }
+  .cards > div > p { margin-top: 5px; font-size: 18px; }
+
+  /* Stack task form inputs full-width on phones */
+  .task-form {
+    flex-direction: column;
+    padding: 16px;
+  }
+  .task-form input,
+  .task-form select,
+  .task-form textarea {
+    width: 100%;
+    margin: 4px 0;
+  }
+  .task-form button {
+    width: 100%;
+  }
+
+  .task-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 95%;
+  }
+  .task-list-item p:nth-child(2) {
+    width: 100%;
+  }
+
+  .filter-bar button {
+    flex: 1 1 auto;
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 16px;
+  }
 }
